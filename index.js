@@ -30,12 +30,14 @@ Promise.all([promiseClientes, promiseProveedores]).then(resp=> {
 
             let promise = filename==="proveedores"? resp[1] : resp[0];
             let info = promise.data;
-            console.log(info);
 
             let html = "";
             for (let i=0; i < info.length; i++) {
-                let id = filename==="proveedores"? info[i].idproveedor : info[i].idcliente;
-                html += "<tr><td>" + id + "</td><td>"+ info[i].nombrecompania +"</td><td>"+ info[i].nombrecontacto +"</td></tr>";
+                console.log(info[i]);
+                let id = filename==="proveedores"? info[i].idproveedor : info[i].idCliente;
+                let nombrecompania = filename==="proveedores"? info[i].nombrecompania : info[i].NombreCompania;
+                let nombrecontacto = filename==="proveedores"? info[i].nombrecontacto : info[i].NombreContacto;
+                html += "<tr><td>" + id + "</td><td>"+ nombrecompania +"</td><td>"+ nombrecontacto +"</td></tr>";
             }
 
             res.writeHead(200, {'Content-Type': 'text/html'});
